@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wall</title>
+</head>
+<body>
+    <h1>upload new pic!</h1>
+    <button type="button"><a href="/upload/">upload new pic</a></button>
+{% for post in all_post %}
+    <div>
+        <h1>Posted by : {{post.user.username}}</h1>
+        <p>Created on: {{post.created_on}}</p>
+        <img style="max-width:600px" src="{{post.image_url}}">
+        <br/>
+        <p>Caption: {{post.caption}}</p>
+        <form method="post" action="/sort/">
+            {% csrf_token %}
+            <input type="hidden" name="upload" value="{{post.id}}">
+            <br/>
+            {% if post.is_sorted %}
+                <input type="hidden" name="sort" value="sort">
+            {% else %}
+                <input type="submit" name="sort" value="sort">
+            {% endif %}
+        </form>
+        {% for sort in post.sortresult%}
+        <p>{{sort.sort_text}}</p>
+        {% endfor %}
+    </div>
+{% endfor %}
+</body>
+</html>
