@@ -5,7 +5,7 @@ from forms import SignUp_form, LogIn_form, Post_form, Like_form, Comment_form,Up
 from django.contrib.auth.hashers import make_password,check_password
 from django.shortcuts import render, redirect
 from models import users, postmodel, likemodel,commentmodel,upvotemodel
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect,JsonResponse
 from models import session_token
 from cloudinary.uploader import upload
 from django.core.mail import send_mail
@@ -193,23 +193,31 @@ def like_view(request):
         #user logged in
         if request.method == "POST":
             #form is submitted
-            like_form=Like_form(request.POST)
-            if like_form.is_valid():
-                post_id=like_form.cleaned_data.get('post')
-
-                existing_like = likemodel.objects.filter(post_id=post_id, user=user).first()
-                if not existing_like:
-                    likemodel.objects.create(post=post_id,user=user)
-                    send_mail('Post Liked!',
-                              'Hi there! Your post has been liked by '+user.name,
-                              'instacloneskj@gmail.com',
-                              [post_id.user.email],
-                              fail_silently=False,
-                              )
-                    return redirect("/feed/")
-                else:
-                    existing_like.delete()
-                    return redirect("/feed/")
+            #like_form=Like_form(request.POST)
+            #if like_form.is_valid():
+               # post_id=like_form.cleaned_data.get('post')
+            post_id = request.POST.get('post_id')
+            current_post=postmodel.objects.filter(id=post_id).first()
+            existing_like = likemodel.objects.filter(post_id=current_post, user=user).first()
+            if not existing_like:
+                likemodel.objects.create(post=current_post,user=user)
+                data={
+                    'flag':True
+                }
+                send_mail('Post Liked!',
+                          'Hi there! Your post has been liked by '+user.name,
+                          'instacloneskj@gmail.com',
+                          [current_post.user.email],
+                          fail_silently=False,
+                          )
+                #return redirect("/feed/")
+            else:
+                existing_like.delete()
+                data = {
+                    'flag': False
+                }
+               # return redirect("/feed/")
+            return JsonResponse(data)
         else:
             return redirect("/feed/")
     else:

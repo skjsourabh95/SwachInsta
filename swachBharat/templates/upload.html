@@ -1,18 +1,31 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static "css/post.css" %}" rel="stylesheet">
     <title>Upload a Picture Now!</title>
 </head>
 <body>
-    <h1>Create new post!</h1>
+ <div class="div">
+        <h1 class="text-center">Create new post</h1>
+</div>
+ <br/><br/><br/><br/>
+<div class= "post">
     <form method="post" enctype="multipart/form-data" >
 
     {% csrf_token %}
     {{ upload_form.as_p }}
     <br/>
-    <input type="submit" value="Create new post">
+        <div class="text-center">
+    <input align="center" class="bpost" type="submit" value="Post">
+</div>
 
 </form>
+</div>
+<SCRIPT src="{% static 'js/jquery-3.2.1.js' %}"></SCRIPT>
+<SCRIPT src="{% static 'js/bootstrap.js' %}"></SCRIPT>
+<script src="{%static "js/custom2.js" %}"></script>
 </body>
 </html>

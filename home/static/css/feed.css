@@ -1,0 +1,32 @@
+.div1{
+  background-color: #1f1f1f;
+  padding:10px;
+  margin:5px;
+  color:#ffff00
+}
+.caption{
+  background-color: #c0c0c0;
+  padding:10px;
+  margin:5px;
+  color:##000000
+}
+.newpost{
+    background-color: #b9d5d5;
+    color:white;
+}
+.logout{
+    background-color: #a52a2a;
+    padding:5px;
+    color:white;
+}
+.upvote{
+    background-color: #ffa500;
+    padding:5px;
+    color:black;
+}
+.body{
+    background-color: #f0f8ff;
+}
+.swachbharat{
+    background-color: #ffa500;
+}

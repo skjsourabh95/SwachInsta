@@ -4,49 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <title>Feeds</title>
+        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+        <link href="{% static "css/feed.css" %}" rel="stylesheet">
 </head>
-<body>
-<h1>Create new post!</h1>
-    <button type="button"><a href="/post/">Create new post</a></button>
+<body class="body">
+<p>
+<div class= "div1" style="text-align: center" >
+    <h1 >Create new post</h1>
+    <button class="newpost" type="button"><a class="text-center" href="/post/">Create new post</a></button>
+    </div>
 <br/>
+<div class="text-center">
+ <button class="swachbharat" type="button"><a class="text-center" href="/swachbharat/">Swachbharat</a></button>
+</div>
 <br/>
-<br/>
-<form method="post" action="/logout/">
+    <div>
+    <form class="text-center" method="post" action="/logout/">
     {% csrf_token %}
-    <input type="submit" name="logout" value="Logout">
+    <input class="logout" type="submit" name="logout" value="Logout">
 </form>
+</div>
+
 {% for post in all_post %}
     <div>
-        <h1>Posted by : {{post.user.username}}</h1>
-        <p>Created on: {{post.created_on}}</p>
-        <img style="max-width:600px" src="{{post.image_url}}">
+        <h1>By: {{post.user.username}}</h1>
+        <p><b>Created on: {{post.created_on}}</b></p>
+        <div class="div1">
+            <img class="center-block" style="max-width:600px" src="{{post.image_url}}">
+        </div>
         <br/>
-        <p>Caption: {{post.caption}}</p>
+        <div class="caption">
+           <h3><b><p class="text-center">{{post.caption}}</p></b></h3>
+        </div>
         <br/>
-        <form method="post" action="/like/">
+    </div>
+    <div>
+        <form onclick="likeThisPost(this);" class="text-center" method="post">
             {% csrf_token %}
-            <input type="hidden" name="post" value="{{post.id}}">
-            <br/>
+            <input class="text-center" type="hidden" name="post" value="{{post.id}}">
             {% if post.is_liked %}
-                <input type="submit" name="like" value="unlike">
+                <input style="background-color:blue;color:white " class="text-center" type="button" name="like" value="like">
             {% else %}
-                <input type="submit" name="like" value="like">
+                <input style="background-color:white;color:black " class="text-center" type="button" name="like" value="like">
             {% endif %}
-            <p>{{ post.like_count }} likes this!</p>
-        </form>
-        <ul>
-            {% for comment in post.comments %}
-            <li><b>{{comment.user.username}}</b> : {{comment.comment_text}} at [{{comment.created_on}}]
-                <form method="post" action="/upvote/">
-                    {% csrf_token %}
-                    <input type="hidden" name="comment" value="{{comment.id}}">
-                    <input  type="submit" name="upvote"  value="upvote">
-                 </form>
+            <br/>
+            <br/>
+            <p class="text-center"><span name="like-count">{{ post.like_count }}</span> likes this!</p>
 
-            {% endfor %}
-        </ul>
-        {{post.upvotes.upvotes}}
-        <form method="post" action="/comment/">
+        </form>
+        <p>
+
+                {% for comment in post.comments %}
+                <p class="text-center">
+                <b>{{comment.user.username}}</b> :
+                    {{comment.comment_text}} <b>
+                    [{{comment.created_on}}] </b>
+                    <form class="text-center" method="post" action="/upvote/">
+                        {% csrf_token %}
+                        <input type="hidden" name="comment" value="{{comment.id}}">
+                        <input class="upvote"  type="submit" name="upvote"  value="upvote">
+                     </form>
+                </p>
+                {% endfor %}
+        </p>
+        <form class="text-center" method="post" action="/comment/">
             {% csrf_token %}
             <input type="hidden" name="post" value="{{post.id}}">
             <br/>
@@ -55,5 +76,9 @@
         </form>
     </div>
     {% endfor %}
+</p>
+<SCRIPT src="{% static 'js/jquery-3.2.1.js' %}"></SCRIPT>
+<SCRIPT src="{% static 'js/bootstrap.js' %}"></SCRIPT>
+<script src="{%static "js/feed.js" %}"></script>
 </body>
 </html>

@@ -1,23 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static "css/custom.css" %}" rel="stylesheet">
     <title>LogIn</title>
 </head>
-<body>
+<body class="body">
 <div class="container text-center">
-<h1>Welcome User!</h1>
+<h1>Welcome User</h1>
 <h2>{{now}}</h2>
-<div class="login-container,text-center">
-    <form method="post">
+<div class="log">
+    <form class="text-center" name="login" method="post"  action="#" onsubmit="required()">
         {% csrf_token %}
+        <p id="username-para"></p>
         <input type="text" placeholder="Username" name="username"><br><br>
+        <p id="password-para"></p>
         <input type="password" placeholder="Password" name="password"><br><br>
-        <input type="submit"  value="LogIn"><br><br>
-        <button type="button"><a href="/">Signup</a></button>
+        <input class="login" type="submit"  value="LogIn"><br><br>
+        <button class="login" type="button"><a href="/">Signup</a></button>
     </form>
-</div>
     <p><b>{{ error }}</b></p>
 </div>
+    <SCRIPT src="{% static 'js/jquery-3.2.1.js' %}"></SCRIPT>
+<SCRIPT src="{% static 'js/bootstrap.js' %}"></SCRIPT>
+<script src="{%static "js/custom.js" %}"></script>
 </body>
 </html>

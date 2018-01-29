@@ -1,13 +1,25 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head class="head">
     <meta charset="UTF-8">
-    <title>SwachBharat</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/swachbharat.css' %}" rel="stylesheet">
+    <title >SwachBharat</title>
 </head>
-<body>
-    <h1>SWACH BHARAT INITIATIVE</h1>
-    <button type="button"><a href="/upload">Upload a Picture</a></button>
-    <br/><br/>
-    <button type="button"><a href="/wall">Show Post wall</a></button>
+<body class= "body">
+    <h1 class="text-center">SWACH BHARAT INITIATIVE</h1>
+     <br/><br/> <br/><br/>
+    <div class="text-center">
+            <p class="div3">
+            <button type="button"><a href="/upload">Upload a Picture</a></button>
+            <br/><br/>
+            <button type="button"><a href="/wall">Show Post wall</a></button>
+            </p>
+    </div>
+
+<SCRIPT src="{% static 'js/jquery-3.2.1.js' %}"></SCRIPT>
+<SCRIPT src="{% static 'js/bootstrap.js' %}"></SCRIPT>
+
 </body>
 </html>

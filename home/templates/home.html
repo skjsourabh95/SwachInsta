@@ -4,41 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <title>SwachInsta</title>
+    <link href="{% static "css/home.css" %}" rel="stylesheet">
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 </head>
-<body>
+<body class="body">
 
-<div class="container text-center">
-    <H1 >SwachInsta</H1>
-    <h2>An Instagram Clone!</h2>
-    <img src="{% static 'images/front.png'%}">
-
+<div class="head">
+    <H1 class="container text-center">SwachInsta</H1>
+    <h2 class="container text-center">An Instagram Clone!</h2>
 </div>
 
+    <img class="center-block" src="{% static 'images/front.png'%}">
+
+
+
 <div class="signup-container text-center">
-    <form method="post">
+    <form method="post" action="#" onsubmit="required()">
         {% csrf_token %}
           <h2>REGISTER URSELF FIRST!</h2>
+        <p id="name-para"></p>
      <input type="text" placeholder="Name" name="name"><br><br>
+         <p id="email-para"></p>
      <input type="email"  placeholder="Email" name="email"><br><br>
+         <p id="username-para"></p>
      <input type="text" placeholder="Username" name="username"><br><br>
+         <p id="password-para"></p>
      <input type="password" placeholder="Password" name="password"><br><br>
-     <input type="submit"  value="SignUp"><br><br>
+         <p id="button-para"></p>
+     <input class="oneClass" type="submit" id="signup"  value="SignUp"><br><br>
 
     </form>
 </div>
 
 <div class="container text-center">
             <class ="navbar-text text-center">
-                    <button type="button"><a href="/login">LogIn</a></button>
+                    <button class="oneClass" id="signup2"  type="button"><a href="/login">LogIn</a></button>
                     <br><br>
             <p><b>{{ error }}</b></p>
             </p>
                 Copyright &copy; 2018 SKJ Inc.
             </p>
 </div>
-
 <SCRIPT src="{% static 'js/jquery-3.2.1.js' %}"></SCRIPT>
 <SCRIPT src="{% static 'js/bootstrap.js' %}"></SCRIPT>
+<script src="{%static "js/custom2.js" %}"></script>
+
 </body>
 </html>

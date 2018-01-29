@@ -1,33 +1,46 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static "css/feed.css" %}" rel="stylesheet">
     <title>Wall</title>
 </head>
-<body>
+<body class="body">
+<div class= "div1" style="text-align: center" >
+    <p>
     <h1>upload new pic!</h1>
-    <button type="button"><a href="/upload/">upload new pic</a></button>
+    <button class="newpost" type="button"><a href="/upload/">upload new pic</a></button>
+    <br/><br/>
+    <button class="newpost" type="button"><a href="/login/">feed</a></button>
+    </p>
+    </div>
 {% for post in all_post %}
-    <div>
+    <div class="text-center">
         <h1>Posted by : {{post.user.username}}</h1>
         <p>Created on: {{post.created_on}}</p>
         <img style="max-width:600px" src="{{post.image_url}}">
         <br/>
-        <p>Caption: {{post.caption}}</p>
+       <div class="caption">
+           <h3><b><p class="text-center">{{post.caption}}</p></b></h3>
+        </div>
         <form method="post" action="/sort/">
             {% csrf_token %}
             <input type="hidden" name="upload" value="{{post.id}}">
-            <br/>
             {% if post.is_sorted %}
                 <input type="hidden" name="sort" value="sort">
             {% else %}
-                <input type="submit" name="sort" value="sort">
+                <input class="upvote" type="submit" name="sort" value="sort">
             {% endif %}
         </form>
         {% for sort in post.sortresult%}
-        <p>{{sort.sort_text}}</p>
+        <h2><p>{{sort.sort_text}}</p></h2>
         {% endfor %}
     </div>
 {% endfor %}
+<SCRIPT src="{% static 'js/jquery-3.2.1.js' %}"></SCRIPT>
+<SCRIPT src="{% static 'js/bootstrap.js' %}"></SCRIPT>
+<script src="{%static "js/custom2.js" %}"></script>
 </body>
 </html>
